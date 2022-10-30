@@ -10,9 +10,6 @@ namespace arbitary_precision_arithmetic {
         long long size = 10;
         unsigned long long* numbers;
         int sign;
-        Integer& Resize(Integer* thisNum, Integer other);
-        Integer& AddElement(Integer* thisNum);
-        Integer& ResizeWithNewSize(Integer* thisNum, int digits);
     public:
         Integer();
         Integer(const Integer&);

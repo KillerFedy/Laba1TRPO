@@ -75,7 +75,14 @@ Integer& Integer::operator+=(const Integer& digit)
 {
     if (this->size < digit.size)
     {
-        *this = Resize(this, digit);
+        unsigned long long* a = new unsigned long long[digit.size];
+        for (int i = 0; i < this->size; i++)
+        {
+            a[i] = this->numbers[i];
+        }
+        this->size = digit.size;
+        delete[] this->numbers;
+        this->numbers = a;
     }
     if (this->sign == digit.sign) {
         for (int i = 0; i < size; i++) {
@@ -89,7 +96,14 @@ Integer& Integer::operator+=(const Integer& digit)
             }
         }
         if (this->numbers[size - 1] >= BASE_DIGIT) {
-            AddElement(this);
+            unsigned long long* a = new unsigned long long[this->size + 1];
+            for (int i = 0; i < this->size; i++)
+            {
+                a[i] = this->numbers[i];
+            }
+            this->size = size + 1;
+            delete[] this->numbers;
+            this->numbers = a;
             this->numbers[size - 2] -= BASE_DIGIT;
             this->numbers[size - 1] += 1;
         }
@@ -126,7 +140,14 @@ Integer& Integer::operator-=(const Integer& digit) {
 
     if (this->size < digit.size)
     {
-        *this = Resize(this, digit);
+        unsigned long long* a = new unsigned long long[digit.size];
+        for (int i = 0; i < this->size; i++)
+        {
+            a[i] = this->numbers[i];
+        }
+        this->size = digit.size;
+        delete[] this->numbers;
+        this->numbers = a;
     }
     if (this->sign == digit.sign) {
         for (int i = 0; i < size; i++) {
@@ -201,7 +222,14 @@ Integer& Integer::operator*=(const Integer& digit)
 {
     Integer res(*this);
     res.sign = this->sign == digit.sign ? 1 : -1;
-    res = ResizeWithNewSize(&res, this->size + digit.size);
+    unsigned long long* a = new unsigned long long[res.size + digit.size];
+    for (int i = 0; i < res.size; i++)
+    {
+        a[i] = res.numbers[i];
+    }
+    res.size = res.size + digit.size;
+    delete[] res.numbers;
+    res.numbers = a;
     for (int i = 0; i < res.size; i++) {
         for (int j = 0; j < res.size - i; j++) {
             res.numbers[i + j] += this->numbers[i] * digit.numbers[j];
@@ -478,40 +506,4 @@ Integer::operator long long unsigned int() const {
 
 Integer::operator long long int() const {
     return static_cast<long long>(this->numbers[0]) ? this->sign > 0: -static_cast<long long>(this->numbers[0]);
-}
-
-Integer& Integer::Resize(Integer* thisNum, Integer other) {
-    unsigned long long* a = new unsigned long long[other.size];
-    for (int i = 0; i < thisNum->size; i++)
-    {
-        a[i] = thisNum->numbers[i];
-    }
-    thisNum->size = other.size;
-    delete[] thisNum->numbers;
-    thisNum->numbers = a;
-    return *thisNum;
-}
-
-Integer& Integer::AddElement(Integer* thisNum) {
-    unsigned long long* a = new unsigned long long[thisNum->size + 1];
-    for (int i = 0; i < thisNum->size; i++)
-    {
-        a[i] = thisNum->numbers[i];
-    }
-    thisNum->size = size + 1;
-    delete[] thisNum->numbers;
-    thisNum->numbers = a;
-    return *thisNum;
-}
-
-Integer& Integer::ResizeWithNewSize(Integer* thisNum, int size) {
-    unsigned long long* a = new unsigned long long[size];
-    for (int i = 0; i < thisNum->size; i++)
-    {
-        a[i] = thisNum->numbers[i];
-    }
-    thisNum->size = size;
-    delete[] thisNum->numbers;
-    thisNum->numbers = a;
-    return *thisNum;
 }
