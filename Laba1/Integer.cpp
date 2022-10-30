@@ -112,11 +112,11 @@ Integer& Integer::operator+=(const Integer& digit)
     else
     {
         this->sign = *this < digit ? -1 : 1;
-        for (int i = 0; i < this->size; ++i) {
+        for (int i = 0; i < this->size; i++) {
             this->numbers[i] -= digit.numbers[i];
         }
 
-        for (int i = 0; i < this->size-1; ++i) {
+        for (int i = 0; i < this->size-1; i++) {
             if (this->numbers[i] < 0) {
                 this->numbers[i] += BASE_DIGIT;
                 this->numbers[i + 1]--;
