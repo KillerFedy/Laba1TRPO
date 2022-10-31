@@ -137,6 +137,14 @@ Integer Integer::operator+(const Integer& digit) const {
 }
 
 Integer& Integer::operator-=(const Integer& digit) {
+    if (*this < digit)
+    {
+        this->sign = -1;
+    }
+    else
+    {
+        this->sign = 1;
+    }
 
     if (this->size < digit.size)
     {
@@ -159,10 +167,6 @@ Integer& Integer::operator-=(const Integer& digit) {
                 this->numbers[i] += BASE_DIGIT;
                 this->numbers[i + 1]--;
             }
-        }
-        if (*this < digit)
-        {
-            this->sign = -1;
         }
         return *this;
     }
@@ -464,7 +468,14 @@ bool Integer::operator>=(const Integer& digit) const {
 
 Integer::operator bool() const {
     Integer a(0);
-    return true ? *this > a: false;
+    if (*this == a)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
 }
 
 Integer::operator char() const {
