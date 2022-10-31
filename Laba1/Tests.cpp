@@ -99,21 +99,66 @@ TEST_CASE("Test16") {
 }
 
 TEST_CASE("Test17") {
+    Integer a(100);
+    REQUIRE(a < 300);
+}
+
+TEST_CASE("Test18") {
+    Integer a(1000);
+    REQUIRE(a > 300);
+}
+
+TEST_CASE("Test19") {
+    Integer a(300);
+    REQUIRE(a <= 300);
+}
+
+TEST_CASE("Test20") {
+    Integer a(300);
+    REQUIRE(a >= 300);
+}
+
+TEST_CASE("Test21") {
+    Integer a(100);
+    REQUIRE(a != 300);
+}
+
+TEST_CASE("Test22") {
+    Integer a(100);
+    REQUIRE(a == 100);
+}
+
+TEST_CASE("Test23") {
+    Integer a(100);
+    REQUIRE(a == 100);
+}
+
+TEST_CASE("Test24") {
     Integer a(0);
     REQUIRE(a == false);
 }
 
-TEST_CASE("Test18") {
+TEST_CASE("Test25") {
     Integer a(1);
     REQUIRE(a == true);
 }
 
-TEST_CASE("Test19") {
+TEST_CASE("Test26") {
     Integer a(234242432352);
     REQUIRE((bool)a == true);
 }
 
-TEST_CASE("Test20") {
+TEST_CASE("Test27") {
     Integer a(97);
-    REQUIRE((char)a == 'a');
+    REQUIRE(a == 'a');
+}
+
+TEST_CASE("Test28") {
+    Integer a(LLONG_MAX);
+    REQUIRE(a == LLONG_MAX);
+}
+
+TEST_CASE("Test29") {
+    Integer a(ULLONG_MAX);
+    REQUIRE(a == ULLONG_MAX);
 }
