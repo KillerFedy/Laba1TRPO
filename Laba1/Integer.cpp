@@ -151,13 +151,13 @@ Integer& Integer::operator-=(const Integer& digit) {
     }
     if (this->sign == digit.sign) {
         for (int i = 0; i < size; i++) {
-            this[i] -= digit.numbers[i];
+            this->numbers[i] -= digit.numbers[i];
         }
 
         for (int i = 0; i < size; i++) {
-            if (this[i] < 0) {
-                this[i] += BASE_DIGIT;
-                this[i + 1]--;
+            if (this->numbers[i] < 0) {
+                this->numbers[i] += BASE_DIGIT;
+                this->numbers[i + 1]--;
             }
         }
         if (*this < digit)
@@ -220,19 +220,19 @@ Integer Integer::operator*(const Integer& digit) const {
 
 Integer& Integer::operator*=(const Integer& digit)
 {
-    Integer res(*this);
+    Integer& res(*this);
     res.sign = this->sign == digit.sign ? 1 : -1;
-    unsigned long long* a = new unsigned long long[res.size + digit.size];
+    /*unsigned long long* a = new unsigned long long[res.size + digit.size];
     for (int i = 0; i < res.size; i++)
     {
         a[i] = res.numbers[i];
     }
     res.size = res.size + digit.size;
     delete[] res.numbers;
-    res.numbers = a;
-    for (int i = 0; i < res.size; i++) {
-        for (int j = 0; j < res.size - i; j++) {
-            res.numbers[i + j] += this->numbers[i] * digit.numbers[j];
+    res.numbers = a;*/
+    for (int i = 0; i < this->size; i++) {
+        for (int j = 0; j < digit.size; j++) {
+            res.numbers[i + j] = this->numbers[i] * digit.numbers[j];
         }
     }
     for (int i = 0; i < res.size - 1; i++) {

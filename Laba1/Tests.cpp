@@ -4,6 +4,6 @@
 
 using namespace arbitary_precision_arithmetic;
 
-TEST_CASE("Calc test", "[calculator]") {
-    REQUIRE(Integer(6) * Integer(5) == 30);
+TEST_CASE("Minus test") {
+    REQUIRE(Integer(6) - Integer(2) == 4);
 }

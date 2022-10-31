@@ -7,7 +7,7 @@ namespace arbitary_precision_arithmetic {
     class Integer final {
     private:
         const unsigned long long BASE_DIGIT = ULLONG_MAX;
-        long long size = 10;
+        unsigned long long size = 10;
         unsigned long long* numbers;
         int sign;
     public:
